@@ -21,14 +21,14 @@ public:
     T deleteAtHead();
     T deleteAtTail();
     void deleteBefore(T targetValue);
-    void deleteAfter(T targetValue);
     void remove(T targetValue);
+    void deleteAfter(T targetValue);
     int getSize(); 
     void reverse();
+    void sortedInsert(Node<T>& a);
     void display();
     Node<T>* search(T key);
 }; 
-#endif // !SINGLE_LINEAR_LINKED_LIST
 template<typename T>
 Node<T>::Node(T value):data(value), next(nullptr)
 {
@@ -295,4 +295,19 @@ Node<T>* SingleLinearLinkedList<T>::search(T key)
     if (temp->next == nullptr && temp->data == key)
         return temp;
     return nullptr;
+}
+template<typename T>
+inline void SingleLinearLinkedList<T>::sortedInsert(Node<T>& a)
+{
+    Node<T>* temp = head;
+    while (temp->next != nullptr && temp->data <= a.data)
+    {
+        temp = temp->next;
+    }
+    if (temp->next == nullptr)
+        insertAtTail(a.data);
+    else if (temp->next != nullptr)
+    {
+        insertBefore(temp->data, a.data);
+    }
 }

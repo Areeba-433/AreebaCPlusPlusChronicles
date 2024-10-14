@@ -28,6 +28,7 @@ public:
     void sortedInsert(Node<T>& a);
     void display();
     Node<T>* search(T key);
+    Node<T>* getMiddle()
 }; 
 template<typename T>
 Node<T>::Node(T value):data(value), next(nullptr)
@@ -310,4 +311,16 @@ inline void SingleLinearLinkedList<T>::sortedInsert(Node<T>& a)
     {
         insertBefore(temp->data, a.data);
     }
+}
+template<typename T>
+inline Node<T>* SingleLinearLinkedList<T>::getMiddle()
+{
+    Node<T>* fast = head;
+    Node<T>* slow = head;
+    while (fast != nullptr || slow != nullptr)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    return slow;
 }

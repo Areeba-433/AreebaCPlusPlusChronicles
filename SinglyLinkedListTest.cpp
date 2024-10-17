@@ -28,7 +28,9 @@ public:
     void sortedInsert(Node<T>& a);
     void display();
     Node<T>* search(T key);
-    Node<T>* getMiddle()
+    Node<T>* getMiddle();
+    bool isListCyclic();
+
 }; 
 template<typename T>
 Node<T>::Node(T value):data(value), next(nullptr)
@@ -323,4 +325,18 @@ inline Node<T>* SingleLinearLinkedList<T>::getMiddle()
         fast = fast->next->next;
     }
     return slow;
+}
+template<typename T>
+inline bool SingleLinearLinkedList<T>::isListCyclic()
+{
+    Node<T>* fast = head;
+    Node<T>* slow = head;
+    while (fast != nullptr || fast->next != nullptr)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+        if (slow == fast)
+            return true;
+    }
+    return false;
 }
